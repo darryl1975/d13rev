@@ -12,7 +12,7 @@ WORKDIR /src
 
 COPY mvnw .
 COPY mvnw.cmd .
-COPY src src
+COPY src .
 COPY pom.xml .
 # RUN mvn -f /home/app/pom.xml clean package
 RUN mvn clean package -Dmaven.test.skip=true
