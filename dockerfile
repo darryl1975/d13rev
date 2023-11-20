@@ -15,14 +15,14 @@ COPY mvnw.cmd .
 COPY src src
 COPY pom.xml .
 # RUN mvn -f /home/app/pom.xml clean package
-RUN mvn package -Dmaven.test.skip=true
+RUN mvn clean package -Dmaven.test.skip=true
 
 #
 # Package stage
 #
 # FROM tomcat:10.1-jdk21
 # FROM tomcat:10.1-jdk17
-# FROM maven:3.9.5-eclipse-temurin-17
+# FROM maven:3.9.5-eclipse-temurin-1poenjdk:20-slim
 # FROM eclipse-temurin:17-jdk
 # FROM maven:3-eclipse-temurin-20
 FROM openjdk:20-slim
