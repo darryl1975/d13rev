@@ -7,8 +7,13 @@
 # FROM maven:3.9.5-eclipse-temurin-17 AS build
 # FROM eclipse-temurin:17-jdk AS build
 FROM maven:3-eclipse-temurin-20 AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
+
+WORKDIR /src
+
+COPY mvnw .
+COPY mvnw.cmd .
+COPY src src
+COPY pom.xml .
 # RUN mvn -f /home/app/pom.xml clean package
 RUN mvn package -Dmaven.test.skip=true
 
@@ -22,7 +27,9 @@ RUN mvn package -Dmaven.test.skip=true
 FROM maven:3-eclipse-temurin-20
 WORKDIR /app
 
-COPY --from=build /home/app/target/d13rev-0.0.1-SNAPSHOT.jar /app/app.jar
+# COPY --from=build /home/app/target/d13rev-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY --from=build /src/target/d13rev-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
