@@ -3,7 +3,10 @@
 # Build stage
 # 
 # FROM tomcat:10.1-jdk21 AS build
-FROM maven:3.9.5-eclipse-temurin-17 AS build
+# FROM tomcat:10.1-jdk17 AS build
+# FROM maven:3.9.5-eclipse-temurin-17 AS build
+# FROM eclipse-temurin:17-jdk AS build
+FROM maven:3-eclipse-temurin-20 AS build
 COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
@@ -13,7 +16,10 @@ RUN mvn -f /home/app/pom.xml clean package
 # Package stage
 #
 # FROM tomcat:10.1-jdk21
-FROM maven:3.9.5-eclipse-temurin-17
+# FROM tomcat:10.1-jdk17
+# FROM maven:3.9.5-eclipse-temurin-17
+# FROM eclipse-temurin:17-jdk
+FROM maven:3-eclipse-temurin-20
 WORKDIR /app
 
 COPY --from=build /home/app/target/d13rev-0.0.1-SNAPSHOT.jar /app/app.jar
