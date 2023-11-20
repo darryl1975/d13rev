@@ -24,7 +24,8 @@ RUN mvn package -Dmaven.test.skip=true
 # FROM tomcat:10.1-jdk17
 # FROM maven:3.9.5-eclipse-temurin-17
 # FROM eclipse-temurin:17-jdk
-FROM maven:3-eclipse-temurin-20
+# FROM maven:3-eclipse-temurin-20
+FROM openjdk:20-slim
 WORKDIR /app
 
 # COPY --from=build /home/app/target/d13rev-0.0.1-SNAPSHOT.jar /app/app.jar
